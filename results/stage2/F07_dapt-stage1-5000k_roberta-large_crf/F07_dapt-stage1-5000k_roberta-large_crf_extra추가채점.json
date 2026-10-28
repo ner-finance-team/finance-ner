@@ -1,0 +1,89 @@
+{
+ "exp": "F07_dapt-stage1-5000k_roberta-large_crf",
+ "set": "crawl350_fable",
+ "scored_by": "score_extra.py (이 PC CPU, fp32 — 학습 때 GPU bf16 채점과 미세 차이 가능)",
+ "n": 350,
+ "score": {
+  "DATE": {
+   "precision": 0.951,
+   "recall": 0.9714,
+   "f1": 0.9611,
+   "tp": 136,
+   "fp": 7,
+   "fn": 4
+  },
+  "FIN_ORG": {
+   "precision": 0.9032,
+   "recall": 0.875,
+   "f1": 0.8889,
+   "tp": 28,
+   "fp": 3,
+   "fn": 4
+  },
+  "FIN_PRODUCT": {
+   "precision": 0.6667,
+   "recall": 0.8421,
+   "f1": 0.7442,
+   "tp": 16,
+   "fp": 8,
+   "fn": 3
+  },
+  "INDICATOR": {
+   "precision": 0.7826,
+   "recall": 0.871,
+   "f1": 0.8244,
+   "tp": 54,
+   "fp": 15,
+   "fn": 8
+  },
+  "MONEY": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "tp": 66,
+   "fp": 0,
+   "fn": 0
+  },
+  "ORG": {
+   "precision": 0.8873,
+   "recall": 0.9235,
+   "f1": 0.905,
+   "tp": 181,
+   "fp": 23,
+   "fn": 15
+  },
+  "POLICY": {
+   "precision": 0.875,
+   "recall": 0.9333,
+   "f1": 0.9032,
+   "tp": 14,
+   "fp": 2,
+   "fn": 1
+  },
+  "RATE": {
+   "precision": 0.9836,
+   "recall": 1.0,
+   "f1": 0.9917,
+   "tp": 60,
+   "fp": 1,
+   "fn": 0
+  },
+  "ALL": {
+   "precision": 0.9039,
+   "recall": 0.9407,
+   "f1": 0.9219,
+   "tp": 555,
+   "fp": 59,
+   "fn": 35
+  },
+  "MACRO_F1": 0.9023
+ },
+ "error_types": {
+  "missed": 18,
+  "spurious": 42,
+  "tag": 5,
+  "boundary": 11,
+  "boundary+tag": 1
+ },
+ "sec": 92.3
+}

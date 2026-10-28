@@ -1,0 +1,380 @@
+{
+ "exp": "T_jin_roberta_ce_lossacc_300k",
+ "config": {
+  "head": "softmax",
+  "loss": "ce",
+  "max_len": 512,
+  "lr": 5e-05,
+  "epochs": 3,
+  "batch": 16,
+  "grad_accum": 1,
+  "seed": 42,
+  "warmup": 0.1,
+  "weight_decay": 0.01,
+  "eval_each_epoch": true,
+  "keep_ckpt": false,
+  "stage": "team_jin",
+  "member": "jin",
+  "pretok": null,
+  "train": "/content/drive/MyDrive/ner/data/split_v3/train.jsonl",
+  "dev": "/content/drive/MyDrive/ner/data/split_v3/dev.jsonl",
+  "test": "/content/drive/MyDrive/ner/data/split_v3/test.jsonl",
+  "model": "klue/roberta-base",
+  "exp": "T_jin_roberta_ce_lossacc_300k"
+ },
+ "finished_at": "2026-10-22 05:12:29",
+ "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+ "params": 110039055,
+ "n_train": 300000,
+ "n_dev": 10000,
+ "n_test": 10000,
+ "encode_sec": 22.6,
+ "train_sec": 1065.0,
+ "infer_sec": 3.4,
+ "resumed_from": null,
+ "train_samples_per_second": 845.68,
+ "train_loss": 0.085,
+ "history": [
+  {
+   "epoch": 1.0,
+   "step": 18750,
+   "train_loss": 0.0944,
+   "dev_f1": 0.7084,
+   "dev_macro_f1": 0.4835,
+   "dev_precision": 0.7187,
+   "dev_recall": 0.6984
+  },
+  {
+   "epoch": 2.0,
+   "step": 37500,
+   "train_loss": 0.0723,
+   "dev_f1": 0.736,
+   "dev_macro_f1": 0.538,
+   "dev_precision": 0.7283,
+   "dev_recall": 0.744
+  },
+  {
+   "epoch": 3.0,
+   "step": 56250,
+   "train_loss": 0.0485,
+   "dev_f1": 0.7428,
+   "dev_macro_f1": 0.563,
+   "dev_precision": 0.7313,
+   "dev_recall": 0.7547
+  }
+ ],
+ "upper_bound_test": {
+  "precision": 0.9706,
+  "recall": 0.9706,
+  "f1": 0.9706,
+  "support": 14918,
+  "tp": 14479,
+  "fp": 438,
+  "fn": 439
+ },
+ "dev": {
+  "ALL": {
+   "precision": 0.7313,
+   "recall": 0.7547,
+   "f1": 0.7428,
+   "support": 13014,
+   "tp": 9822,
+   "fp": 3609,
+   "fn": 3192
+  },
+  "CV": {
+   "precision": 0.7817,
+   "recall": 0.8203,
+   "f1": 0.8006,
+   "support": 6161,
+   "tp": 5054,
+   "fp": 1411,
+   "fn": 1107
+  },
+  "OG": {
+   "precision": 0.7521,
+   "recall": 0.7844,
+   "f1": 0.7679,
+   "support": 4648,
+   "tp": 3646,
+   "fp": 1202,
+   "fn": 1002
+  },
+  "TM": {
+   "precision": 0.5575,
+   "recall": 0.5229,
+   "f1": 0.5396,
+   "support": 937,
+   "tp": 490,
+   "fp": 389,
+   "fn": 447
+  },
+  "AF": {
+   "precision": 0.5211,
+   "recall": 0.5024,
+   "f1": 0.5116,
+   "support": 836,
+   "tp": 420,
+   "fp": 386,
+   "fn": 416
+  },
+  "FD": {
+   "precision": 0.493,
+   "recall": 0.5281,
+   "f1": 0.5099,
+   "support": 267,
+   "tp": 141,
+   "fp": 145,
+   "fn": 126
+  },
+  "TR": {
+   "precision": 0.5038,
+   "recall": 0.4342,
+   "f1": 0.4664,
+   "support": 152,
+   "tp": 66,
+   "fp": 65,
+   "fn": 86
+  },
+  "NW": {
+   "precision": 0.3125,
+   "recall": 0.3846,
+   "f1": 0.3448,
+   "support": 13,
+   "tp": 5,
+   "fp": 11,
+   "fn": 8
+  },
+  "MACRO_F1": 0.563
+ },
+ "test": {
+  "ALL": {
+   "precision": 0.7218,
+   "recall": 0.739,
+   "f1": 0.7303,
+   "support": 14918,
+   "tp": 11024,
+   "fp": 4249,
+   "fn": 3894
+  },
+  "CV": {
+   "precision": 0.7964,
+   "recall": 0.8063,
+   "f1": 0.8013,
+   "support": 7200,
+   "tp": 5805,
+   "fp": 1484,
+   "fn": 1395
+  },
+  "OG": {
+   "precision": 0.7319,
+   "recall": 0.7544,
+   "f1": 0.743,
+   "support": 5001,
+   "tp": 3773,
+   "fp": 1382,
+   "fn": 1228
+  },
+  "TM": {
+   "precision": 0.5659,
+   "recall": 0.5729,
+   "f1": 0.5694,
+   "support": 1042,
+   "tp": 597,
+   "fp": 458,
+   "fn": 445
+  },
+  "AF": {
+   "precision": 0.5213,
+   "recall": 0.5169,
+   "f1": 0.5191,
+   "support": 1066,
+   "tp": 551,
+   "fp": 506,
+   "fn": 515
+  },
+  "FD": {
+   "precision": 0.3956,
+   "recall": 0.5022,
+   "f1": 0.4425,
+   "support": 464,
+   "tp": 233,
+   "fp": 356,
+   "fn": 231
+  },
+  "TR": {
+   "precision": 0.487,
+   "recall": 0.4444,
+   "f1": 0.4647,
+   "support": 126,
+   "tp": 56,
+   "fp": 59,
+   "fn": 70
+  },
+  "NW": {
+   "precision": 0.6923,
+   "recall": 0.4737,
+   "f1": 0.5625,
+   "support": 19,
+   "tp": 9,
+   "fp": 4,
+   "fn": 10
+  },
+  "MACRO_F1": 0.5861
+ },
+ "test_by_category": {
+  "IT_과학": {
+   "precision": 0.6969,
+   "recall": 0.7218,
+   "f1": 0.7091,
+   "support": 532,
+   "tp": 384,
+   "fp": 167,
+   "fn": 148
+  },
+  "건강": {
+   "precision": 0.7238,
+   "recall": 0.7466,
+   "f1": 0.735,
+   "support": 888,
+   "tp": 663,
+   "fp": 253,
+   "fn": 225
+  },
+  "경제": {
+   "precision": 0.7511,
+   "recall": 0.758,
+   "f1": 0.7545,
+   "support": 657,
+   "tp": 498,
+   "fp": 165,
+   "fn": 159
+  },
+  "교육": {
+   "precision": 0.721,
+   "recall": 0.736,
+   "f1": 0.7284,
+   "support": 769,
+   "tp": 566,
+   "fp": 219,
+   "fn": 203
+  },
+  "국제": {
+   "precision": 0.7912,
+   "recall": 0.7822,
+   "f1": 0.7867,
+   "support": 528,
+   "tp": 413,
+   "fp": 109,
+   "fn": 115
+  },
+  "라이프스타일": {
+   "precision": 0.7225,
+   "recall": 0.7361,
+   "f1": 0.7292,
+   "support": 1114,
+   "tp": 820,
+   "fp": 315,
+   "fn": 294
+  },
+  "문화": {
+   "precision": 0.6013,
+   "recall": 0.5656,
+   "f1": 0.5829,
+   "support": 320,
+   "tp": 181,
+   "fp": 120,
+   "fn": 139
+  },
+  "사건사고": {
+   "precision": 0.7128,
+   "recall": 0.7484,
+   "f1": 0.7302,
+   "support": 1562,
+   "tp": 1169,
+   "fp": 471,
+   "fn": 393
+  },
+  "사회일반": {
+   "precision": 0.7196,
+   "recall": 0.7315,
+   "f1": 0.7255,
+   "support": 1270,
+   "tp": 929,
+   "fp": 362,
+   "fn": 341
+  },
+  "산업": {
+   "precision": 0.7377,
+   "recall": 0.7693,
+   "f1": 0.7532,
+   "support": 958,
+   "tp": 737,
+   "fp": 262,
+   "fn": 221
+  },
+  "스포츠": {
+   "precision": 0.6835,
+   "recall": 0.6814,
+   "f1": 0.6825,
+   "support": 317,
+   "tp": 216,
+   "fp": 100,
+   "fn": 101
+  },
+  "여성복지": {
+   "precision": 0.7255,
+   "recall": 0.7646,
+   "f1": 0.7446,
+   "support": 871,
+   "tp": 666,
+   "fp": 252,
+   "fn": 205
+  },
+  "여행레저": {
+   "precision": 0.663,
+   "recall": 0.6651,
+   "f1": 0.6641,
+   "support": 636,
+   "tp": 423,
+   "fp": 215,
+   "fn": 213
+  },
+  "연예": {
+   "precision": 0.6118,
+   "recall": 0.6327,
+   "f1": 0.6221,
+   "support": 294,
+   "tp": 186,
+   "fp": 118,
+   "fn": 108
+  },
+  "정치": {
+   "precision": 0.7875,
+   "recall": 0.8041,
+   "f1": 0.7957,
+   "support": 1802,
+   "tp": 1449,
+   "fp": 391,
+   "fn": 353
+  },
+  "지역": {
+   "precision": 0.6951,
+   "recall": 0.7214,
+   "f1": 0.708,
+   "support": 1084,
+   "tp": 782,
+   "fp": 343,
+   "fn": 302
+  },
+  "취미": {
+   "precision": 0.7088,
+   "recall": 0.7158,
+   "f1": 0.7123,
+   "support": 1316,
+   "tp": 942,
+   "fp": 387,
+   "fn": 374
+  }
+ }
+}

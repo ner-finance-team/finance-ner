@@ -1,0 +1,17 @@
+/* 기사 본문 안에 직접 칠하는 형광펜 (네이버 스타일과 겹치지 않게 nerx- 접두어) */
+mark.nerx-ent{
+  background: var(--nerx-bg) !important; color: inherit !important;
+  border-radius: 5px; padding: 1px 3px; margin: 0 1px;
+  box-shadow: inset 0 -2px 0 var(--nerx-fg);
+  cursor: help; transition: background .15s, box-shadow .15s;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+mark.nerx-ent .nerx-tag{
+  font: 700 10px/1 system-ui, "Malgun Gothic", sans-serif !important; color: var(--nerx-fg) !important;
+  margin-left: 3px; vertical-align: super; letter-spacing: .2px;
+}
+mark.nerx-ent.nerx-off{ background: transparent !important; box-shadow: none; }
+mark.nerx-ent.nerx-off .nerx-tag{ display: none; }
+mark.nerx-ent.nerx-flash{ animation: nerx-flash 1.1s ease 2; }
+@keyframes nerx-flash{ 50%{ outline: 3px solid var(--nerx-fg); outline-offset: 3px; } }
+#title_area mark.nerx-ent .nerx-tag{ font-size: 11px !important; }

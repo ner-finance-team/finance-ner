@@ -1,0 +1,29 @@
+# 비밀 정보 (API 키는 환경 변수로만)
+.env
+*.env
+anthropic_api_key.txt
+*api_key*
+
+# 모델 가중치·데이터 (용량·라이선스: AI Hub 원본과 라벨 데이터는 공개하지 않음)
+demo/models/*/
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+data/
+*.jsonl
+!results/stage1/runs.jsonl
+*.zip
+
+# 데모 실행 중 생기는 것
+demo/.venv/
+.venv/
+demo/server/claude_cache/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# 기타
+desktop.ini
+.DS_Store
+Thumbs.db

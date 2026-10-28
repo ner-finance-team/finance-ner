@@ -1,0 +1,46 @@
+{
+ "main": "M2_roberta-base_crf_300k",
+ "expert": "X_TR_expert",
+ "tag": "TR",
+ "main_only": {
+  "dev": {
+   "f1": 0.7597,
+   "TR": 0.4944
+  },
+  "test": {
+   "f1": 0.7474,
+   "TR": 0.4836
+  }
+ },
+ "replace_main_wins": {
+  "dev": {
+   "f1": 0.7499,
+   "TR": 0.2828
+  },
+  "test": {
+   "f1": 0.7398,
+   "TR": 0.2724
+  }
+ },
+ "replace_expert_wins": {
+  "dev": {
+   "f1": 0.7444,
+   "TR": 0.2689
+  },
+  "test": {
+   "f1": 0.7342,
+   "TR": 0.2503
+  }
+ },
+ "union": {
+  "dev": {
+   "f1": 0.7501,
+   "TR": 0.2943
+  },
+  "test": {
+   "f1": 0.7397,
+   "TR": 0.2812
+  }
+ },
+ "chosen_on_dev": "union"
+}

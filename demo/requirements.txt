@@ -1,0 +1,16 @@
+# 금융 NER 데모 (Python 3.11 에서 확인한 버전)
+# CPU만 쓰는 PC라면 torch 를 먼저 설치하면 용량이 작다:
+#   pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1
+transformers==5.20.2
+tokenizers==0.23.3
+safetensors==0.8.0
+pytorch-crf==0.7.2
+kiwipiepy==0.24.1
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.1
+requests==2.34.2
+beautifulsoup4==4.15.0
+# Claude 비교 기능을 쓸 때만 필요
+anthropic==2.3.0

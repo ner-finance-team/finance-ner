@@ -1,0 +1,199 @@
+{
+ "name": "M1_hong_klue-roberta-large_lr2e-5_300k",
+ "recorded_at": "2026-10-22 07:42:45",
+ "meta": {
+  "member": "hong",
+  "model": "klue/roberta-large",
+  "head": "softmax",
+  "loss": "ce",
+  "pretok": "none",
+  "train_size": "300k",
+  "lr": 2e-05,
+  "epochs": 3,
+  "batch": 16,
+  "seed": 42,
+  "max_length": 512,
+  "warmup_ratio": 0.1,
+  "weight_decay": 0.01,
+  "stage": "M1_모델비교"
+ },
+ "epoch_dev": [
+  {
+   "epoch": 0.213,
+   "step": 4000,
+   "epoch_end": false,
+   "dev_f1": 0.6609,
+   "dev_macro_f1": 0.4299,
+   "dev_precision": 0.6721,
+   "dev_recall": 0.65
+  },
+  {
+   "epoch": 0.427,
+   "step": 8000,
+   "epoch_end": false,
+   "dev_f1": 0.69,
+   "dev_macro_f1": 0.4706,
+   "dev_precision": 0.6775,
+   "dev_recall": 0.703
+  },
+  {
+   "epoch": 0.64,
+   "step": 12000,
+   "epoch_end": false,
+   "dev_f1": 0.7011,
+   "dev_macro_f1": 0.4785,
+   "dev_precision": 0.6906,
+   "dev_recall": 0.712
+  },
+  {
+   "epoch": 0.853,
+   "step": 16000,
+   "epoch_end": false,
+   "dev_f1": 0.7159,
+   "dev_macro_f1": 0.5188,
+   "dev_precision": 0.7048,
+   "dev_recall": 0.7273
+  },
+  {
+   "epoch": 1.0,
+   "step": 18750,
+   "epoch_end": true,
+   "dev_f1": 0.7281,
+   "dev_macro_f1": 0.5275,
+   "dev_precision": 0.7384,
+   "dev_recall": 0.718
+  },
+  {
+   "epoch": 1.067,
+   "step": 20000,
+   "epoch_end": false,
+   "dev_f1": 0.7253,
+   "dev_macro_f1": 0.5269,
+   "dev_precision": 0.7356,
+   "dev_recall": 0.7153
+  },
+  {
+   "epoch": 1.28,
+   "step": 24000,
+   "epoch_end": false,
+   "dev_f1": 0.7423,
+   "dev_macro_f1": 0.5425,
+   "dev_precision": 0.7468,
+   "dev_recall": 0.7379
+  },
+  {
+   "epoch": 1.493,
+   "step": 28000,
+   "epoch_end": false,
+   "dev_f1": 0.733,
+   "dev_macro_f1": 0.526,
+   "dev_precision": 0.7121,
+   "dev_recall": 0.7552
+  },
+  {
+   "epoch": 1.707,
+   "step": 32000,
+   "epoch_end": false,
+   "dev_f1": 0.7439,
+   "dev_macro_f1": 0.5694,
+   "dev_precision": 0.7416,
+   "dev_recall": 0.7464
+  },
+  {
+   "epoch": 1.92,
+   "step": 36000,
+   "epoch_end": false,
+   "dev_f1": 0.7469,
+   "dev_macro_f1": 0.5613,
+   "dev_precision": 0.7423,
+   "dev_recall": 0.7517
+  },
+  {
+   "epoch": 2.0,
+   "step": 37500,
+   "epoch_end": true,
+   "dev_f1": 0.7454,
+   "dev_macro_f1": 0.5602,
+   "dev_precision": 0.7356,
+   "dev_recall": 0.7555
+  },
+  {
+   "epoch": 2.133,
+   "step": 40000,
+   "epoch_end": false,
+   "dev_f1": 0.7485,
+   "dev_macro_f1": 0.5853,
+   "dev_precision": 0.7452,
+   "dev_recall": 0.7518
+  },
+  {
+   "epoch": 2.347,
+   "step": 44000,
+   "epoch_end": false,
+   "dev_f1": 0.7499,
+   "dev_macro_f1": 0.5946,
+   "dev_precision": 0.7324,
+   "dev_recall": 0.7682
+  },
+  {
+   "epoch": 2.56,
+   "step": 48000,
+   "epoch_end": false,
+   "dev_f1": 0.7543,
+   "dev_macro_f1": 0.6079,
+   "dev_precision": 0.741,
+   "dev_recall": 0.7681
+  },
+  {
+   "epoch": 2.773,
+   "step": 52000,
+   "epoch_end": false,
+   "dev_f1": 0.7584,
+   "dev_macro_f1": 0.6094,
+   "dev_precision": 0.7522,
+   "dev_recall": 0.7647
+  },
+  {
+   "epoch": 2.987,
+   "step": 56000,
+   "epoch_end": false,
+   "dev_f1": 0.7585,
+   "dev_macro_f1": 0.6129,
+   "dev_precision": 0.7464,
+   "dev_recall": 0.771
+  },
+  {
+   "epoch": 3.0,
+   "step": 56250,
+   "epoch_end": true,
+   "dev_f1": 0.7584,
+   "dev_macro_f1": 0.6108,
+   "dev_precision": 0.7463,
+   "dev_recall": 0.7709
+  }
+ ],
+ "best_dev_f1_during_training": 0.7585,
+ "train_seconds_this_session": 5563,
+ "train_runtime": 5561.1119,
+ "batch": {
+  "per_device_batch": 16,
+  "gradient_accumulation": 1,
+  "effective_batch": 16
+ },
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "scores": {
+  "dev": {
+   "f1": 0.7456,
+   "precision": 0.7328,
+   "recall": 0.7588,
+   "macro_f1": 0.5745
+  },
+  "test": {
+   "f1": 0.7358,
+   "precision": 0.7269,
+   "recall": 0.7449,
+   "macro_f1": 0.5899
+  }
+ },
+ "exp": "M1_hong_klue-roberta-large_lr2e-5_300k"
+}

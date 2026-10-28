@@ -1,0 +1,305 @@
+{
+ "note": "예측 개체 앞뒤 공백 제거 후 다시 채점 (fin_ft.py 위치 버그, 10/27 수정 전 실행). 원본 결과 파일은 그대로 둠",
+ "scores": {
+  "dev": {
+   "DATE": {
+    "precision": 0.8658,
+    "recall": 0.9625,
+    "f1": 0.9116,
+    "tp": 4903,
+    "fp": 760,
+    "fn": 191
+   },
+   "FIN_ORG": {
+    "precision": 0.9326,
+    "recall": 0.9309,
+    "f1": 0.9318,
+    "tp": 2076,
+    "fp": 150,
+    "fn": 154
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.7407,
+    "recall": 0.7624,
+    "f1": 0.7514,
+    "tp": 860,
+    "fp": 301,
+    "fn": 268
+   },
+   "INDICATOR": {
+    "precision": 0.8707,
+    "recall": 0.8539,
+    "f1": 0.8622,
+    "tp": 2881,
+    "fp": 428,
+    "fn": 493
+   },
+   "MONEY": {
+    "precision": 0.9885,
+    "recall": 0.9984,
+    "f1": 0.9934,
+    "tp": 2491,
+    "fp": 29,
+    "fn": 4
+   },
+   "ORG": {
+    "precision": 0.8994,
+    "recall": 0.9046,
+    "f1": 0.902,
+    "tp": 4221,
+    "fp": 472,
+    "fn": 445
+   },
+   "POLICY": {
+    "precision": 0.8266,
+    "recall": 0.749,
+    "f1": 0.7859,
+    "tp": 391,
+    "fp": 82,
+    "fn": 131
+   },
+   "RATE": {
+    "precision": 0.9892,
+    "recall": 0.9837,
+    "f1": 0.9864,
+    "tp": 2467,
+    "fp": 27,
+    "fn": 41
+   },
+   "ALL": {
+    "precision": 0.9002,
+    "recall": 0.9216,
+    "f1": 0.9108,
+    "tp": 20290,
+    "fp": 2249,
+    "fn": 1727
+   },
+   "MACRO_F1": 0.8906
+  },
+  "test": {
+   "DATE": {
+    "precision": 0.8647,
+    "recall": 0.9582,
+    "f1": 0.909,
+    "tp": 5022,
+    "fp": 786,
+    "fn": 219
+   },
+   "FIN_ORG": {
+    "precision": 0.9269,
+    "recall": 0.9357,
+    "f1": 0.9313,
+    "tp": 2371,
+    "fp": 187,
+    "fn": 163
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.7656,
+    "recall": 0.7919,
+    "f1": 0.7785,
+    "tp": 1016,
+    "fp": 311,
+    "fn": 267
+   },
+   "INDICATOR": {
+    "precision": 0.8677,
+    "recall": 0.8477,
+    "f1": 0.8576,
+    "tp": 2749,
+    "fp": 419,
+    "fn": 494
+   },
+   "MONEY": {
+    "precision": 0.9915,
+    "recall": 0.998,
+    "f1": 0.9947,
+    "tp": 2453,
+    "fp": 21,
+    "fn": 5
+   },
+   "ORG": {
+    "precision": 0.8965,
+    "recall": 0.904,
+    "f1": 0.9003,
+    "tp": 4409,
+    "fp": 509,
+    "fn": 468
+   },
+   "POLICY": {
+    "precision": 0.7873,
+    "recall": 0.7077,
+    "f1": 0.7454,
+    "tp": 322,
+    "fp": 87,
+    "fn": 133
+   },
+   "RATE": {
+    "precision": 0.9853,
+    "recall": 0.9817,
+    "f1": 0.9835,
+    "tp": 2420,
+    "fp": 36,
+    "fn": 45
+   },
+   "ALL": {
+    "precision": 0.8981,
+    "recall": 0.9205,
+    "f1": 0.9091,
+    "tp": 20762,
+    "fp": 2356,
+    "fn": 1794
+   },
+   "MACRO_F1": 0.8875
+  },
+  "test_2000": {
+   "DATE": {
+    "precision": 0.8533,
+    "recall": 0.9572,
+    "f1": 0.9022,
+    "tp": 983,
+    "fp": 169,
+    "fn": 44
+   },
+   "FIN_ORG": {
+    "precision": 0.927,
+    "recall": 0.9381,
+    "f1": 0.9325,
+    "tp": 470,
+    "fp": 37,
+    "fn": 31
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.7655,
+    "recall": 0.7762,
+    "f1": 0.7708,
+    "tp": 222,
+    "fp": 68,
+    "fn": 64
+   },
+   "INDICATOR": {
+    "precision": 0.8779,
+    "recall": 0.8738,
+    "f1": 0.8759,
+    "tp": 568,
+    "fp": 79,
+    "fn": 82
+   },
+   "MONEY": {
+    "precision": 0.9865,
+    "recall": 0.9977,
+    "f1": 0.9921,
+    "tp": 437,
+    "fp": 6,
+    "fn": 1
+   },
+   "ORG": {
+    "precision": 0.8957,
+    "recall": 0.9087,
+    "f1": 0.9022,
+    "tp": 816,
+    "fp": 95,
+    "fn": 82
+   },
+   "POLICY": {
+    "precision": 0.7449,
+    "recall": 0.7087,
+    "f1": 0.7264,
+    "tp": 73,
+    "fp": 25,
+    "fn": 30
+   },
+   "RATE": {
+    "precision": 0.9916,
+    "recall": 0.9812,
+    "f1": 0.9864,
+    "tp": 470,
+    "fp": 4,
+    "fn": 9
+   },
+   "ALL": {
+    "precision": 0.8932,
+    "recall": 0.9217,
+    "f1": 0.9072,
+    "tp": 4039,
+    "fp": 483,
+    "fn": 343
+   },
+   "MACRO_F1": 0.8861
+  },
+  "extra": {
+   "DATE": {
+    "precision": 0.8671,
+    "recall": 0.9786,
+    "f1": 0.9195,
+    "tp": 137,
+    "fp": 21,
+    "fn": 3
+   },
+   "FIN_ORG": {
+    "precision": 0.9355,
+    "recall": 0.9062,
+    "f1": 0.9206,
+    "tp": 29,
+    "fp": 2,
+    "fn": 3
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.6364,
+    "recall": 0.7368,
+    "f1": 0.6829,
+    "tp": 14,
+    "fp": 8,
+    "fn": 5
+   },
+   "INDICATOR": {
+    "precision": 0.9123,
+    "recall": 0.8387,
+    "f1": 0.8739,
+    "tp": 52,
+    "fp": 5,
+    "fn": 10
+   },
+   "MONEY": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 66,
+    "fp": 0,
+    "fn": 0
+   },
+   "ORG": {
+    "precision": 0.8333,
+    "recall": 0.8418,
+    "f1": 0.8376,
+    "tp": 165,
+    "fp": 33,
+    "fn": 31
+   },
+   "POLICY": {
+    "precision": 0.875,
+    "recall": 0.9333,
+    "f1": 0.9032,
+    "tp": 14,
+    "fp": 2,
+    "fn": 1
+   },
+   "RATE": {
+    "precision": 0.9836,
+    "recall": 1.0,
+    "f1": 0.9917,
+    "tp": 60,
+    "fp": 1,
+    "fn": 0
+   },
+   "ALL": {
+    "precision": 0.8818,
+    "recall": 0.9102,
+    "f1": 0.8957,
+    "tp": 537,
+    "fp": 72,
+    "fn": 53
+   },
+   "MACRO_F1": 0.8912
+  }
+ }
+}

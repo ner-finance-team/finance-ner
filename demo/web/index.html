@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>뉴스 개체명 인식 데모</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --text:#1d2433; --muted:#667085; --line:#e4e7ec; --accent:#2563eb; --accent-soft:#eff4ff;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#0f1218; --card:#171b23; --text:#e8eaf0; --muted:#98a2b3; --line:#2a303b; --accent:#6ea0ff; --accent-soft:#1c2740; }
+  mark.ent{ filter:saturate(.9) brightness(.92); }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;line-height:1.6}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+header h1{font-size:24px;margin:0}
+.badge{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted);background:var(--card)}
+.badge.ok{color:#079455;border-color:#abefc6}
+.steps{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.step b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--line);color:var(--text);font-size:13px}
+.step.on{color:var(--text);font-weight:600}.step.on b{background:var(--accent);color:#fff}
+.step+.step:before{content:"›";margin-right:8px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.url{display:flex;gap:8px;margin-bottom:12px}
+.url input{flex:1;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font-size:14px}
+button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;background:var(--accent);color:#fff}
+button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);padding:6px 10px;font-weight:500}
+.list{display:flex;flex-direction:column;gap:6px;max-height:70vh;overflow:auto;margin:0 -6px;padding:0 6px}
+.item{text-align:left;background:transparent;color:var(--text);border:1px solid transparent;font-weight:500;padding:10px 10px;border-radius:10px;line-height:1.45}
+.item:hover{background:var(--accent-soft)}
+.item.sel{border-color:var(--accent);background:var(--accent-soft)}
+.hint{color:var(--muted);font-size:13px}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-left:auto}
+.live .pulse{width:8px;height:8px;border-radius:50%;background:#12b76a;box-shadow:0 0 0 0 rgba(18,183,106,.6);animation:pl 1.6s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 8px rgba(18,183,106,0)}100%{box-shadow:0 0 0 0 rgba(18,183,106,0)}}
+.item .sub{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted);margin-top:3px;font-weight:400}
+.new{font-size:10.5px;font-weight:800;color:#fff;background:#f04438;border-radius:4px;padding:0 5px;letter-spacing:.3px}
+.timebar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.tpill{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted);background:var(--bg)}
+.tpill b{color:var(--text)}
+.tpill.hot{border-color:#fda29b;background:#fef3f2;color:#b42318}.tpill.hot b{color:#b42318}
+[hidden]{display:none!important}
+.empty{display:grid;place-items:center;text-align:center;min-height:320px;color:var(--muted)}
+.empty .big{font-size:40px}
+/* 기사 */
+.meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:13px;margin-bottom:8px}
+.atitle{font-size:24px;line-height:1.5;font-weight:700;margin:0 0 16px}
+.abody p{margin:0 0 14px;font-size:16.5px;line-height:2.05}
+mark.ent{position:relative;background:var(--bg-c);color:inherit;border-radius:5px;padding:1px 3px;box-shadow:inset 0 -2px 0 var(--fg-c);cursor:help;transition:opacity .15s}
+mark.ent sup{font-size:10px;font-weight:700;color:var(--fg-c);margin-left:2px;letter-spacing:.2px;vertical-align:super;line-height:0}
+.atitle mark.ent sup{font-size:11px}
+mark.ent.off{background:transparent;box-shadow:none}
+mark.ent.off sup{display:none}
+mark.ent.low{box-shadow:inset 0 -2px 0 var(--fg-c),0 0 0 1px dashed}
+mark.ent.flash{animation:flash 1.2s ease 2}
+@keyframes flash{50%{outline:3px solid var(--fg-c);outline-offset:2px}}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#111827;color:#fff;font-size:13px;padding:6px 10px;border-radius:8px;opacity:0;transition:opacity .1s;white-space:nowrap}
+/* 범례 */
+.legend{position:sticky;top:0;z-index:5;background:var(--card);padding:10px 0 12px;margin:-4px 0 12px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;border:1.5px solid var(--fg-c);background:var(--bg-c);color:#1d2433;cursor:pointer;user-select:none}
+.chip .n{font-weight:700;opacity:.8}
+.chip.off{background:transparent;color:var(--muted);border-style:dashed}
+.legend .sp{flex:1}
+.conf{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+/* 리포트 */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.stat{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat .k{font-size:12px;color:var(--muted)}.stat .v{font-size:22px;font-weight:700}
+.tagrow{border-top:1px solid var(--line);padding:12px 0}
+.tagrow h3{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px}
+.dot{width:12px;height:12px;border-radius:4px;background:var(--bg-c);border:1.5px solid var(--fg-c)}
+.ents{display:flex;flex-wrap:wrap;gap:6px}
+.ent{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:3px 9px;font-size:14px;cursor:pointer;color:var(--text);font-weight:500}
+.ent:hover{border-color:var(--fg-c)}
+.ent small{color:var(--muted);margin-left:4px}
+.loading{display:flex;gap:10px;align-items:center;color:var(--muted)}
+.spin{width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.err{color:#d92d20}
+footer{margin-top:24px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📰 뉴스 개체명 인식 데모</h1>
+    <span class="badge" id="model">모델 확인 중…</span>
+    <span class="live"><span class="pulse"></span>실시간 · <span id="clock"></span></span>
+  </header>
+  <div class="steps">
+    <div class="step on" id="s1"><b>1</b>기사 고르기</div>
+    <div class="step" id="s2"><b>2</b>색으로 표시된 기사 보기</div>
+    <div class="step" id="s3"><b>3</b>개체 리포트</div>
+  </div>
+
+  <div class="grid">
+    <!-- ① 기사 고르기 -->
+    <section class="card">
+      <h2>① 기사 고르기</h2>
+      <div class="url">
+        <input id="url" placeholder="네이버 뉴스 기사 주소 붙여넣기" autocomplete="off">
+        <button id="go">분석</button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:4px 0 8px">
+        <span class="hint">또는 <b>방금 올라온</b> 경제 뉴스에서 고르기 <span id="listTime"></span></span>
+        <button class="ghost" id="reload" title="목록 새로고침">↻ 새로고침</button>
+      </div>
+      <div class="list" id="list"><div class="loading"><div class="spin"></div>불러오는 중…</div></div>
+    </section>
+
+    <!-- ② 기사 + ③ 리포트 -->
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="card" id="articleCard">
+        <div class="empty" id="empty"><div><div class="big">👈</div>왼쪽에서 기사를 고르면<br>제목·본문의 개체를 <b>태그 색</b>으로 칠해 보여 줍니다.</div></div>
+        <div id="article" hidden>
+          <div class="legend" id="legend"></div>
+          <div class="timebar" id="timebar"></div>
+          <div class="meta" id="meta"></div>
+          <h1 class="atitle" id="atitle"></h1>
+          <div class="abody" id="abody"></div>
+        </div>
+      </section>
+      <section class="card" id="reportCard" hidden>
+        <h2>③ 개체 리포트 <span class="hint">— 개체를 누르면 본문 위치로 이동합니다</span></h2>
+        <div class="stats" id="stats"></div>
+        <div id="report"></div>
+      </section>
+    </div>
+  </div>
+  <footer>모델이 자동으로 찾은 결과라 틀린 표시가 있을 수 있습니다. 마우스를 올리면 태그와 확신도(모델이 그 태그를 고른 확률)가 보입니다.</footer>
+</div>
+<div id="tip"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let LABELS = {}, RESULT = null, OFF = new Set(), MINCONF = 0;
+
+function colorVars(tag){ const l = LABELS[tag] || {bg:"#e5e7eb", fg:"#374151"}; return `--bg-c:${l.bg};--fg-c:${l.fg}`; }
+function tagName(tag){ return (LABELS[tag] && LABELS[tag].name) || tag; }
+// 네이버 시각("2026-10-26 05:53:00")은 한국 시간 → 지금과의 차이를 "n분 전"으로
+function kst(s){ return s ? new Date(s.replace(" ", "T") + "+09:00") : null; }
+function ago(d){ if(!d) return ""; const m = Math.round((Date.now() - d) / 60000);
+  return m < 1 ? "방금 전" : m < 60 ? `${m}분 전` : m < 1440 ? `${Math.floor(m/60)}시간 ${m%60}분 전` : `${Math.floor(m/1440)}일 전`; }
+function fmt(d){ return d ? d.toLocaleString("ko-KR", {timeZone:"Asia/Seoul", month:"long", day:"numeric", weekday:"short", hour:"2-digit", minute:"2-digit"}) : ""; }
+function agoMin(t){ const m = /(\d+)\s*분/.exec(t || ""); return m ? +m[1] : (/(초|방금)/.test(t||"") ? 0 : 999); }
+setInterval(() => { $("#clock").textContent = new Date().toLocaleTimeString("ko-KR", {timeZone:"Asia/Seoul"}); }, 1000);
+function setStep(n){ [1,2,3].forEach(i => $("#s"+i).classList.toggle("on", i <= n)); }
+
+async function api(path, body){
+  const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)} : {});
+  if(!r.ok){ let m = r.statusText; try{ m = (await r.json()).detail || m }catch(e){} throw new Error(m); }
+  return r.json();
+}
+
+async function init(){
+  try{
+    const h = await api("/api/health"); LABELS = await api("/api/labels");
+    $("#model").textContent = `● 모델: ${h.model}${h.pretok ? " (형태소 입력)" : ""} · 태그 ${h.tags.length}종`;
+    $("#model").classList.add("ok");
+  }catch(e){ $("#model").textContent = "서버 연결 실패"; $("#model").classList.add("err"); }
+  loadList();
+}
+
+async function loadList(){
+  $("#list").innerHTML = `<div class="loading"><div class="spin"></div>불러오는 중…</div>`;
+  try{
+    const r = await api("/api/latest?section=101&n=25"), sel = $("#url").value.trim();
+    $("#list").innerHTML = r.items.map(a => `<button class="item${a.url === sel ? " sel" : ""}" data-url="${esc(a.url)}">${esc(a.title)}
+        <div class="sub">${agoMin(a.ago) <= 10 ? '<span class="new">NEW</span>' : ""}${esc(a.press || "")}${a.ago ? " · " + esc(a.ago) : ""}</div></button>`).join("") || `<span class="hint">기사를 찾지 못했습니다</span>`;
+    $("#listTime").textContent = `(${kst(r.fetched) ? new Date().toLocaleTimeString("ko-KR",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit"}) : ""} 기준 · 1분마다 갱신)`;
+  }catch(e){ $("#list").innerHTML = `<span class="err">목록을 불러오지 못했습니다: ${esc(e.message)}</span>`; }
+}
+
+async function analyze(url){
+  if(!url) return;
+  document.querySelectorAll(".item").forEach(b => b.classList.toggle("sel", b.dataset.url === url));
+  $("#empty").hidden = false; $("#article").hidden = true; $("#reportCard").hidden = true;
+  $("#empty").innerHTML = `<div class="loading"><div class="spin"></div>기사를 가져와 개체를 찾는 중… (몇 초 걸려요)</div>`;
+  setStep(1);
+  try{
+    RESULT = await api("/api/article", {url});
+    OFF = new Set(); render();
+  }catch(e){ $("#empty").innerHTML = `<div class="err">분석 실패: ${esc(e.message)}</div>`; }
+}
+
+function markup(t){
+  // 개체 위치(원문 기준)를 순서대로 감싸 HTML로. 개체끼리 겹치지 않음.
+  let out = "", pos = 0;
+  t.entities.slice().sort((a,b) => a.start - b.start).forEach((e, k) => {
+    if(e.start < pos) return;
+    out += esc(t.text.slice(pos, e.start));
+    const low = e.score < 0.6 ? " low" : "";
+    out += `<mark class="ent${low}" id="e-${t.id}-${e.start}" data-tag="${e.tag}" data-score="${e.score}" style="${colorVars(e.tag)}">${esc(t.text.slice(e.start, e.end))}<sup>${e.tag}</sup></mark>`;
+    pos = e.end;
+  });
+  return out + esc(t.text.slice(pos));
+}
+
+function render(){
+  const r = RESULT, [title, ...paras] = r.texts;
+  $("#empty").hidden = true; $("#article").hidden = false; $("#reportCard").hidden = false;
+  const m = r.article || {};
+  const d = kst(m.date), md = kst(m.modified), hot = d && (Date.now() - d) < 3600e3;
+  $("#timebar").innerHTML = [
+    d && `<span class="tpill${hot ? " hot" : ""}">🕒 기사 입력 <b>${fmt(d)}</b> · <b id="agoNow">${ago(d)}</b></span>`,
+    md && m.modified.slice(0,16) !== m.date.slice(0,16) && `<span class="tpill">✏️ 수정 ${fmt(md)}</span>`,
+    `<span class="tpill">⚡ 분석 ${new Date().toLocaleTimeString("ko-KR",{timeZone:"Asia/Seoul"})} · ${r.seconds.toFixed(1)}초</span>`].filter(Boolean).join("");
+  window.__articleDate = d;
+  $("#meta").innerHTML = [m.press && `<b>${esc(m.press)}</b>`, m.url && `<a href="${esc(m.url)}" target="_blank" rel="noopener">네이버 원문 보기 ↗</a>`].filter(Boolean).join(" · ");
+  $("#atitle").innerHTML = markup(title);
+  $("#abody").innerHTML = paras.map(p => `<p>${markup(p)}</p>`).join("");
+  // 범례(태그 켜고 끄기) — 개체가 많은 순
+  const groups = r.report.by_tag;
+  $("#legend").innerHTML = groups.map(g => `<span class="chip" data-tag="${g.tag}" style="${colorVars(g.tag)}" title="눌러서 켜기/끄기">${esc(tagName(g.tag))} <span class="n">${g.total}</span></span>`).join("")
+    + (groups.length ? `<span class="sp"></span><label class="conf">확신도 <input type="range" id="conf" min="0" max="0.95" step="0.05" value="${MINCONF}"> <span id="confv">${Math.round(MINCONF*100)}%</span> 이상</label>` : `<span class="hint">찾은 개체가 없습니다</span>`);
+  // 리포트
+  $("#stats").innerHTML = [["찾은 개체", r.report.entities], ["태그 종류", groups.length], ["문장 수", r.sentences], ["처리 시간", r.seconds.toFixed(1) + "초"]]
+    .map(([k,v]) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  $("#report").innerHTML = groups.map(g => `<div class="tagrow" data-tag="${g.tag}" style="${colorVars(g.tag)}">
+      <h3><span class="dot"></span>${esc(tagName(g.tag))} <span class="hint">${g.tag} · ${g.unique}종 ${g.total}회</span></h3>
+      <div class="ents">${g.items.map(x => `<span class="ent" data-jump="e-${x.first.id}-${x.first.start}" title="평균 확신도 ${Math.round(x.score*100)}%">${esc(x.text)}${x.count > 1 ? `<small>×${x.count}</small>` : ""}</span>`).join("")}</div></div>`).join("");
+  applyFilter(); setStep(3);
+}
+
+function applyFilter(){
+  document.querySelectorAll("mark.ent").forEach(el => el.classList.toggle("off", OFF.has(el.dataset.tag) || +el.dataset.score < MINCONF));
+  document.querySelectorAll(".chip").forEach(c => c.classList.toggle("off", OFF.has(c.dataset.tag)));
+  document.querySelectorAll(".tagrow").forEach(c => c.style.opacity = OFF.has(c.dataset.tag) ? .35 : 1);
+}
+
+// 이벤트
+$("#go").onclick = () => analyze($("#url").value.trim());
+$("#url").onkeydown = e => { if(e.key === "Enter") analyze($("#url").value.trim()); };
+$("#reload").onclick = loadList;
+$("#list").onclick = e => { const b = e.target.closest(".item"); if(b){ $("#url").value = b.dataset.url; analyze(b.dataset.url); } };
+document.addEventListener("click", e => {
+  const c = e.target.closest(".chip");
+  if(c){ OFF.has(c.dataset.tag) ? OFF.delete(c.dataset.tag) : OFF.add(c.dataset.tag); applyFilter(); }
+  const j = e.target.closest("[data-jump]");
+  if(j){ const el = document.getElementById(j.dataset.jump); if(el){ el.scrollIntoView({behavior:"smooth", block:"center"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); } }
+});
+document.addEventListener("input", e => { if(e.target.id === "conf"){ MINCONF = +e.target.value; $("#confv").textContent = Math.round(MINCONF*100) + "%"; applyFilter(); } });
+const tip = $("#tip");
+document.addEventListener("mouseover", e => {
+  const m = e.target.closest("mark.ent");
+  if(!m){ tip.style.opacity = 0; return; }
+  tip.textContent = `${tagName(m.dataset.tag)} (${m.dataset.tag}) · 확신도 ${Math.round(m.dataset.score*100)}%`;
+  tip.style.opacity = 1;
+});
+document.addEventListener("mousemove", e => { tip.style.left = (e.clientX + 12) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+setInterval(() => { loadList(); }, 60000);
+setInterval(() => { const a = document.getElementById("agoNow"); if(a && window.__articleDate) a.textContent = ago(window.__articleDate); }, 30000);
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+{
+ "model": "13 mmBERT-small (김현호, HF 토큰분류 softmax, 서브워드)",
+ "scored_by": "fin_score 공통 채점, 이 PC CPU",
+ "evals": {
+  "test_2000": {
+   "DATE": {
+    "precision": 0.8978,
+    "recall": 0.9494,
+    "f1": 0.9229,
+    "tp": 975,
+    "fp": 111,
+    "fn": 52
+   },
+   "FIN_ORG": {
+    "precision": 0.9387,
+    "recall": 0.9481,
+    "f1": 0.9434,
+    "tp": 475,
+    "fp": 31,
+    "fn": 26
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.7129,
+    "recall": 0.7552,
+    "f1": 0.7334,
+    "tp": 216,
+    "fp": 87,
+    "fn": 70
+   },
+   "INDICATOR": {
+    "precision": 0.8287,
+    "recall": 0.8262,
+    "f1": 0.8274,
+    "tp": 537,
+    "fp": 111,
+    "fn": 113
+   },
+   "MONEY": {
+    "precision": 0.9954,
+    "recall": 0.9977,
+    "f1": 0.9966,
+    "tp": 437,
+    "fp": 2,
+    "fn": 1
+   },
+   "ORG": {
+    "precision": 0.881,
+    "recall": 0.8987,
+    "f1": 0.8897,
+    "tp": 807,
+    "fp": 109,
+    "fn": 91
+   },
+   "POLICY": {
+    "precision": 0.6355,
+    "recall": 0.6602,
+    "f1": 0.6476,
+    "tp": 68,
+    "fp": 39,
+    "fn": 35
+   },
+   "RATE": {
+    "precision": 0.7061,
+    "recall": 0.6973,
+    "f1": 0.7017,
+    "tp": 334,
+    "fp": 139,
+    "fn": 145
+   },
+   "ALL": {
+    "precision": 0.8595,
+    "recall": 0.8784,
+    "f1": 0.8688,
+    "tp": 3849,
+    "fp": 629,
+    "fn": 533
+   },
+   "MACRO_F1": 0.8328
+  },
+  "extra": {
+   "DATE": {
+    "precision": 0.9452,
+    "recall": 0.9857,
+    "f1": 0.965,
+    "tp": 138,
+    "fp": 8,
+    "fn": 2
+   },
+   "FIN_ORG": {
+    "precision": 0.9032,
+    "recall": 0.875,
+    "f1": 0.8889,
+    "tp": 28,
+    "fp": 3,
+    "fn": 4
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.3214,
+    "recall": 0.4737,
+    "f1": 0.383,
+    "tp": 9,
+    "fp": 19,
+    "fn": 10
+   },
+   "INDICATOR": {
+    "precision": 0.8308,
+    "recall": 0.871,
+    "f1": 0.8504,
+    "tp": 54,
+    "fp": 11,
+    "fn": 8
+   },
+   "MONEY": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 66,
+    "fp": 0,
+    "fn": 0
+   },
+   "ORG": {
+    "precision": 0.8333,
+    "recall": 0.8418,
+    "f1": 0.8376,
+    "tp": 165,
+    "fp": 33,
+    "fn": 31
+   },
+   "POLICY": {
+    "precision": 0.7857,
+    "recall": 0.7333,
+    "f1": 0.7586,
+    "tp": 11,
+    "fp": 3,
+    "fn": 4
+   },
+   "RATE": {
+    "precision": 0.8033,
+    "recall": 0.8167,
+    "f1": 0.8099,
+    "tp": 49,
+    "fp": 12,
+    "fn": 11
+   },
+   "ALL": {
+    "precision": 0.8539,
+    "recall": 0.8814,
+    "f1": 0.8674,
+    "tp": 520,
+    "fp": 89,
+    "fn": 70
+   },
+   "MACRO_F1": 0.8117
+  },
+  "dev": {
+   "DATE": {
+    "precision": 0.9189,
+    "recall": 0.9492,
+    "f1": 0.9338,
+    "tp": 4835,
+    "fp": 427,
+    "fn": 259
+   },
+   "FIN_ORG": {
+    "precision": 0.9186,
+    "recall": 0.9215,
+    "f1": 0.9201,
+    "tp": 2055,
+    "fp": 182,
+    "fn": 175
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.6756,
+    "recall": 0.7606,
+    "f1": 0.7156,
+    "tp": 858,
+    "fp": 412,
+    "fn": 270
+   },
+   "INDICATOR": {
+    "precision": 0.8212,
+    "recall": 0.8165,
+    "f1": 0.8188,
+    "tp": 2755,
+    "fp": 600,
+    "fn": 619
+   },
+   "MONEY": {
+    "precision": 0.9892,
+    "recall": 0.9956,
+    "f1": 0.9924,
+    "tp": 2484,
+    "fp": 27,
+    "fn": 11
+   },
+   "ORG": {
+    "precision": 0.8894,
+    "recall": 0.8941,
+    "f1": 0.8917,
+    "tp": 4172,
+    "fp": 519,
+    "fn": 494
+   },
+   "POLICY": {
+    "precision": 0.7594,
+    "recall": 0.7375,
+    "f1": 0.7483,
+    "tp": 385,
+    "fp": 122,
+    "fn": 137
+   },
+   "RATE": {
+    "precision": 0.7087,
+    "recall": 0.7041,
+    "f1": 0.7064,
+    "tp": 1766,
+    "fp": 726,
+    "fn": 742
+   },
+   "ALL": {
+    "precision": 0.8649,
+    "recall": 0.877,
+    "f1": 0.871,
+    "tp": 19310,
+    "fp": 3015,
+    "fn": 2707
+   },
+   "MACRO_F1": 0.8409
+  },
+  "test": {
+   "DATE": {
+    "precision": 0.9164,
+    "recall": 0.9471,
+    "f1": 0.9315,
+    "tp": 4964,
+    "fp": 453,
+    "fn": 277
+   },
+   "FIN_ORG": {
+    "precision": 0.9195,
+    "recall": 0.9329,
+    "f1": 0.9262,
+    "tp": 2364,
+    "fp": 207,
+    "fn": 170
+   },
+   "FIN_PRODUCT": {
+    "precision": 0.701,
+    "recall": 0.7841,
+    "f1": 0.7403,
+    "tp": 1006,
+    "fp": 429,
+    "fn": 277
+   },
+   "INDICATOR": {
+    "precision": 0.8144,
+    "recall": 0.8079,
+    "f1": 0.8111,
+    "tp": 2620,
+    "fp": 597,
+    "fn": 623
+   },
+   "MONEY": {
+    "precision": 0.9927,
+    "recall": 0.9947,
+    "f1": 0.9937,
+    "tp": 2445,
+    "fp": 18,
+    "fn": 13
+   },
+   "ORG": {
+    "precision": 0.8783,
+    "recall": 0.8891,
+    "f1": 0.8836,
+    "tp": 4336,
+    "fp": 601,
+    "fn": 541
+   },
+   "POLICY": {
+    "precision": 0.7021,
+    "recall": 0.6681,
+    "f1": 0.6847,
+    "tp": 304,
+    "fp": 129,
+    "fn": 151
+   },
+   "RATE": {
+    "precision": 0.7136,
+    "recall": 0.7095,
+    "f1": 0.7116,
+    "tp": 1749,
+    "fp": 702,
+    "fn": 716
+   },
+   "ALL": {
+    "precision": 0.8632,
+    "recall": 0.8773,
+    "f1": 0.8702,
+    "tp": 19788,
+    "fp": 3136,
+    "fn": 2768
+   },
+   "MACRO_F1": 0.8353
+  }
+ }
+}

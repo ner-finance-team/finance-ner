@@ -1,0 +1,88 @@
+{
+ "name": "M3_llm_claude-opus-5-5",
+ "model": "claude-opus-5-5",
+ "member": "sejin_choi",
+ "n_test": 100,
+ "test200": {
+  "ALL": {
+   "precision": 0.2109,
+   "recall": 0.5822,
+   "f1": 0.3097,
+   "support": 146,
+   "tp": 85,
+   "fp": 318,
+   "fn": 61
+  },
+  "CV": {
+   "precision": 0.2716,
+   "recall": 0.6875,
+   "f1": 0.3894,
+   "support": 64,
+   "tp": 44,
+   "fp": 118,
+   "fn": 20
+  },
+  "OG": {
+   "precision": 0.3125,
+   "recall": 0.75,
+   "f1": 0.4412,
+   "support": 40,
+   "tp": 30,
+   "fp": 66,
+   "fn": 10
+  },
+  "TM": {
+   "precision": 0.0395,
+   "recall": 0.1765,
+   "f1": 0.0645,
+   "support": 17,
+   "tp": 3,
+   "fp": 73,
+   "fn": 14
+  },
+  "AF": {
+   "precision": 0.1212,
+   "recall": 0.381,
+   "f1": 0.1839,
+   "support": 21,
+   "tp": 8,
+   "fp": 58,
+   "fn": 13
+  },
+  "FD": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 2
+  },
+  "TR": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 2,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  "NW": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "support": 0,
+   "tp": 0,
+   "fp": 1,
+   "fn": 0
+  },
+  "MACRO_F1": 0.1541
+ },
+ "usage": {
+  "input": 8821,
+  "cache_read": 190674,
+  "cache_write": 1926,
+  "output": 8098
+ },
+ "not_in_text": 0
+}
