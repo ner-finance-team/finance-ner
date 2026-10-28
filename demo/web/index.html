@@ -107,7 +107,7 @@ footer{margin-top:24px;font-size:12px;color:var(--muted)}
     <section class="card">
       <h2>① 기사 고르기</h2>
       <div class="url">
-        <input id="url" placeholder="네이버 뉴스 기사 주소 붙여넣기" autocomplete="off">
+        <input id="url" placeholder="네이버 뉴스 기사 주소 또는 분석할 문장" autocomplete="off">
         <button id="go">분석</button>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin:4px 0 8px">
@@ -183,12 +183,14 @@ async function loadList(){
 
 async function analyze(url){
   if(!url) return;
+  const isUrl = /^https?:\/\//.test(url);   // 주소가 아니면 입력한 문장을 그대로 분석(줄마다 한 문단)
   document.querySelectorAll(".item").forEach(b => b.classList.toggle("sel", b.dataset.url === url));
   $("#empty").hidden = false; $("#article").hidden = true; $("#reportCard").hidden = true;
-  $("#empty").innerHTML = `<div class="loading"><div class="spin"></div>기사를 가져와 개체를 찾는 중… (몇 초 걸려요)</div>`;
+  $("#empty").innerHTML = `<div class="loading"><div class="spin"></div>${isUrl ? "기사를 가져와 " : ""}개체를 찾는 중… (몇 초 걸려요)</div>`;
   setStep(1);
   try{
-    RESULT = await api("/api/article", {url});
+    RESULT = isUrl ? await api("/api/article", {url})
+      : await api("/api/ner", {texts: [{id: "title", text: "직접 입력한 문장"}].concat(url.split(/\n+/).map(s => s.trim()).filter(Boolean).map((s, i) => ({id: "p" + i, text: s})))});
     OFF = new Set(); render();
   }catch(e){ $("#empty").innerHTML = `<div class="err">분석 실패: ${esc(e.message)}</div>`; }
 }
